@@ -2,7 +2,7 @@
 
 ## Objetivo
 CarLang é uma linguagem de alto nível para controlar um carro virtual em uma VM.  
-A ideia é permitir o controle do carro (acelerar, frear, virar, parar) além do uso e leitura de sensores (velocidade, combustível, posição), com estruturas de programação comuns como **variáveis, condicionais e loops**.
+A ideia é permitir o controle do carro (acelerar, frear, virar, parar) além do uso e leitura de sensores (velocidade, combustível, posição), com estruturas como **variáveis, condicionais e loops**.
 
 ---
 
@@ -44,11 +44,11 @@ Number      = Digit { Digit } ;
 
 ## Características da Linguagem
 
-- **Variáveis:** armazenam valores numéricos e leituras de sensores.  
+- **Variáveis:** armazenam valores numéricos de acordo com a leituras de sensores.  
 - **Condicionais:** permitem controle de fluxo com `if/else`.  
 - **Loops:** permitem repetição com `while`.  
 - **Comandos do carro:**
-  - `accelerar(x)` → aumenta velocidade em `x`.
+  - `acelerar(x)` → aumenta velocidade em `x`.
   - `frear(x)` → reduz velocidade em `x`.
   - `virar(direita|esquerda)` → muda direção.
   - `parar` → zera a velocidade.
