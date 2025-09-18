@@ -77,5 +77,5 @@ parar;
 
 Descrição:
 O programa acelera enquanto houver combustível, reduz a velocidade se ultrapassar 100 km/h e vira à direita em cada iteração. Quando o combustível acaba, o carro para.   
-Letter      = "a" | ... | "z" | "A" | ... | "Z"     
-Digit       = "0" | ... | "9"    
+Letter      = "a" - "Z"       
+Digit       = "0" - "9"     
