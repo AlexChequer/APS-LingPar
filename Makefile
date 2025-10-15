@@ -1,14 +1,32 @@
-BISON=bison
-FLEX=flex
+# Makefile para CarLang (Flex + Bison) - usa libfl do Homebrew quando disponível
 
-# Gera apenas os arquivos C/H
-all: parser.c lexer.c carlang.tab.h
+FL_LIB := $(shell test -f /opt/homebrew/opt/flex/lib/libfl.a && echo /opt/homebrew/opt/flex/lib/libfl.a || echo -lfl)
 
-parser.c carlang.tab.h: carlang.y
-	$(BISON) -d -o parser.c carlang.y
+.PHONY: all carlang lexer parser clean run
 
-lexer.c: carlang.l carlang.tab.h
-	$(FLEX) -o lexer.c carlang.l
+all: carlang
+
+carlang: parser.tab.c lex.yy.c
+	gcc -o carlang parser.tab.c lex.yy.c $(FL_LIB)
+
+parser.tab.c parser.tab.h: parser.y
+	bison -d parser.y
+
+lex.yy.c: lexer.l parser.tab.h
+	flex lexer.l
+
+lexer: lex.yy.c
+	@echo "Lexer gerado: lex.yy.c"
+
+parser: parser.tab.c
+	@echo "Parser gerado: parser.tab.c parser.tab.h"
+
+run: carlang
+	@if [ -f a.carlang ]; then \
+	  ./carlang a.carlang; \
+	else \
+	  echo "Arquivo a.carlang não encontrado. Crie um arquivo de teste e rode 'make run' novamente."; \
+	fi
 
 clean:
-	rm -f parser.c lexer.c carlang.tab.h
+	rm -f carlang parser.tab.c parser.tab.h lex.yy.c
