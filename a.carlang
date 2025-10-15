@@ -1,0 +1,12 @@
+accelerar(10);
+ler(velocidade) -> v;
+
+if (v > 0) {
+    virar(direita);
+} else {
+    frear(5);
+}
+
+while (v > 0) {
+    frear(1);
+}
