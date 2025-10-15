@@ -1,22 +1,14 @@
-CC=gcc
-CFLAGS=-Wall -Wextra -O2
+BISON=bison
+FLEX=flex
 
-# Em Linux geralmente -lfl; no macOS pode ser -ll
-LEXLIB=-lfl
+# Gera apenas os arquivos C/H
+all: parser.c lexer.c carlang.tab.h
 
-all: carlang
+parser.c carlang.tab.h: carlang.y
+	$(BISON) -d -o parser.c carlang.y
 
-carlang: parser.c lexer.c src/main.c
-	$(CC) $(CFLAGS) -o $@ parser.c lexer.c src/main.c $(LEXLIB)
-
-parser.c carlang.tab.h: src/carlang.y
-	bison -d -o parser.c src/carlang.y
-
-lexer.c: src/carlang.l carlang.tab.h
-	flex -o lexer.c src/carlang.l
+lexer.c: carlang.l carlang.tab.h
+	$(FLEX) -o lexer.c carlang.l
 
 clean:
-	rm -f carlang parser.c carlang.tab.h lexer.c
-
-test: carlang
-	./carlang src/sample.car || true
+	rm -f parser.c lexer.c carlang.tab.h
