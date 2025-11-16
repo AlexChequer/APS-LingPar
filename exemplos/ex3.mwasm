@@ -1,0 +1,18 @@
+; vel = 10
+SET TIME 10
+; frear(2)
+SET TIME 2
+L0:
+DECJZ TIME L1
+DECJZ POWER L1
+GOTO L0
+L1:
+HALT
+; if (vel > 5)
+DECJZ TIME L2
+L2:
+; ler(velocidade) -> velAtual (no-op nesta VM)
+; virar(esquerda)
+; parar()
+SET POWER 0
+HALT

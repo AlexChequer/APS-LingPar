@@ -1,0 +1,9 @@
+vel = 10;
+
+if (vel > 5) {
+    frear(2);
+}
+
+ler(velocidade) -> velAtual;
+virar(esquerda);
+parar;

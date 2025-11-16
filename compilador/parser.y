@@ -57,6 +57,7 @@ int new_label() {
     char *str;
 }
 
+/* tokens com tipos */
 %token <num> NUMBER
 %token <str> ID
 
@@ -68,6 +69,9 @@ int new_label() {
 %token VELOCIDADE COMBUSTIVEL POSICAO
 %token EQ NEQ GT LT GE LE
 %token ARROW
+
+/* não-terminais com tipo string */
+%type <str> Direction Sensor
 
 %%
 
@@ -113,11 +117,8 @@ IfStmt:
 
           emit("; if (%s > %d)", $3, $5);
           /* Teste destrutivo simples:
-             enquanto registrador > 0, ele vai decrementando.
-             Aqui fazemos um teste "grosseiro": se o registrador ja é 0,
-             ele pula o bloco. Caso contrário, executa o bloco uma vez.
-             (Nao restauramos o valor original; é uma simplificacao
-              suficiente para exemplos simples.)
+             se registrador == 0, pula bloco;
+             senão, executa bloco uma vez (não restauramos valor).
           */
           emit("DECJZ %s L%d", r ? "POWER" : "TIME", Lend);
           /* bloco 'then' já foi emitido por Program */
@@ -125,7 +126,7 @@ IfStmt:
       }
     ;
 
-/* while (x > 0) { ... }
+/* while (x > N) { ... }
    Supondo que x está mapeado para TIME ou POWER.
    A condição é destrutiva: cada iteração consome 1 da variável.
 */

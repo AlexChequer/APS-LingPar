@@ -1,0 +1,18 @@
+; contador = 3
+SET TIME 3
+; frear(1)
+SET TIME 1
+L0:
+DECJZ TIME L1
+DECJZ POWER L1
+GOTO L0
+L1:
+HALT
+; while (contador > 0)
+L2:
+DECJZ TIME L3
+GOTO L2
+L3:
+; parar()
+SET POWER 0
+HALT

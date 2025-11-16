@@ -1,0 +1,7 @@
+contador = 3;
+
+while (contador > 0) {
+    frear(1);
+}
+
+parar;

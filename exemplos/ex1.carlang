@@ -1,0 +1,5 @@
+tempo = 5;
+forca = 2;
+
+accelerar(4);
+parar;

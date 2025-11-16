@@ -1,0 +1,14 @@
+; tempo = 5
+SET TIME 5
+; forca = 2
+SET POWER 2
+; acelerar(4)
+SET TIME 4
+L0:
+DECJZ TIME L1
+INC POWER
+GOTO L0
+L1:
+; parar()
+SET POWER 0
+HALT
